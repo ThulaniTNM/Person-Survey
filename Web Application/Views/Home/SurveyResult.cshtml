@@ -1,0 +1,84 @@
+﻿@model Web_Application.Models.Food
+
+@{
+    ViewBag.Title = "SurveyResult";
+}
+
+
+            <div class="row" style="background-color:white;padding:20px">
+                <div class="col-md-12" style="margin-top:15px;">
+                    <table class="table table-striped">
+                        <tbody style="font-size:medium;">
+
+                            <tr>
+                                <th>Total number of surveys:</th>
+                                <td>@ViewBag.totalNumSurvey</td>
+                            </tr>
+
+                            <tr>
+                                <th>Average age:</th>
+                                <td>@ViewBag.averageAge</td>
+                            </tr>
+
+                            <tr>
+                                <th>Oldest person who participated in survey:</th>
+                                <td>@ViewBag.oldestPersonSurvey</td>
+                            </tr>
+
+                            <tr>
+                                <th>Youngest person who participated in survey</th>
+                                <td>@ViewBag.youngestPersonSurvey </td>
+                            </tr>
+
+                            <tr>
+                                <th>Percentage of people who like Pizza:</th>
+                                <td>@ViewBag.peoplePizzaPercentage</td>
+                            </tr>
+
+                            <tr>
+                                <th>Percentage of people who like Pasta:</th>
+                                <td>@ViewBag.peoplePastaPercentage</td>
+                            </tr>
+
+                            <tr>
+                                <th>Percentage of people who like Pap and Wors:</th>
+                                <td>@ViewBag.peoplePapPercentage</td>
+                            </tr>
+
+                            <tr>
+                                <th>People like to eat out:</th>
+                                <td>@ViewBag.peopleEatOutPercentage</td>
+                            </tr>
+
+                            <tr>
+                                <th>People like to watch movies:</th>
+                                <td>@ViewBag.peopleWatchMoviesPercentage</td>
+                            </tr>
+
+                            <tr>
+                                <th>People like to watch TV:</th>
+                                <td>@ViewBag.peopleWatchTVPercentage</td>
+                            </tr>
+
+                            <tr>
+                                <th>People like to listen to the radio:</th>
+                                <td>@ViewBag.peopleListenRadioPercentage</td>
+                            </tr>
+
+                            <tr style="margin-top:10px;">
+                                <td style="text-align:center" colspan="2">
+                                    <div class="homeDivButtons" style="width:30%;">
+                                        <p>
+                                            <a href="@Url.Action("Index")" class="btn btn-info btn-lg">
+                                                OK &nbsp;&nbsp;<span class="glyphicon glyphicon-ok-sign"></span>
+                                            </a>
+                                        </p>
+                                        </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                       
+                    </table>
+
+                </div>
+            </div>

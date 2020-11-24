@@ -1,0 +1,173 @@
+﻿@model Web_Application.Models.Person
+
+@{
+    ViewBag.Title = "PersonSurvey";
+}
+
+<div class="row personRow">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+
+        @*Row 1*@
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="page-header homeDivButtons" style="text-align:center;">
+                    @* Center the page header**@
+                    <h1>Survey Form</h1>
+                </div>
+            </div>
+        </div>
+
+        <br />
+
+        @*Row 2*@
+        <div class="row">
+            <div class="col-sm-12 col-md-12 colo-lg-12">
+                <div class="divSurveyHead">
+                    <h3>
+                        Take our Survey
+                    </h3>
+                    <h4>Person Details :</h4>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@*Row for form*@
+<div class="row personRow">
+    <br />
+    <div class="col-sm-12 col-md-12 col-lg-12">
+        @*This columns has 15 rows*@
+
+        @using (Html.BeginForm()) {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            @*Row 1*@
+            <div class="row">
+                <div class="col-md-3">
+                    @Html.LabelFor(model => model.Surname, htmlAttributes: new { @class = "control-label" })
+                </div>
+
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.Surname, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Surname, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <br />
+            @*Row 2*@
+            <div class="row">
+                <div class="col-md-3">@Html.LabelFor(model => model.FirstNames, htmlAttributes: new { @class = "control-label" }) </div>
+
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.FirstNames, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.FirstNames, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <br />
+            @*Row 3*@
+            <div class="row">
+                <div class="col-md-3">@Html.LabelFor(model => model.Contact, htmlAttributes: new { @class = "control-label" })</div>
+
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.Contact, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Contact, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <br />
+            @*Row 4*@
+            <div class="row">
+                <div class="col-md-3">@Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label" })</div>
+
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <br />
+            @*Row 5*@
+            <div class="row">
+                <div class="col-md-3">@Html.LabelFor(model => model.Age, htmlAttributes: new { @class = "control-label" })</div>
+
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.Age, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Age, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <!--End here user details-->
+            <br />
+            @*Row 6*@
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <div class="divSurveyHead">
+                        <h4>   What is your favourite food ? (You can choose more than 1 answer)</h4>
+                    </div>
+                </div>
+            </div>
+
+            @*Row 7,8,9,10,12,13*@
+            foreach (var kvp in Model.Food.SelectedFood) {
+                <br />
+                <div class="row">
+                    <div class="col-xs-4 col-md-3">@Html.Label(Model.Food.FoodDetails[kvp.Key], htmlAttributes: new { @class = "control-label" })</div>
+                    <div class="col-xs-8 col-md-9">
+                        @Html.EditorFor(m => m.Food.SelectedFood[kvp.Key], new { htmlAttributes = new { @class = "form-control checkboxFood" } })
+                    </div>
+                </div>
+            }
+
+
+            @*Row 14*@
+            <br />
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <table class="table table-bordered" style="background-color: white;word-wrap: break-word;word-break: break-all;">
+                        <tr class="divSurveyHead">
+                            <th></th>
+                            <th>Strongly Agree (1) </th>
+                            <th>Agree (2) </th>
+                            <th>Neutral (3)</th>
+                            <th>Disagree (4)</th>
+                            <th>Strongly disagree (5)</th>
+                        </tr>
+                        @foreach (var lkl in Model.Liking.Options) {
+                    <tr style="text-align:center;">
+                        <td>@lkl.Key</td>
+
+                        @for (int i = 0; i < 5; i++) {
+                            <td>@Html.RadioButtonFor(m => m.Liking.Options[lkl.Key], (i + 1).ToString()) </td>
+                            @*Generate five radio  buttons with same key but different value*@
+                            @*@Html.ValidationMessageFor(model => model.Liking.Options[lkl.Key], "", new { @class = "text-danger" })*@
+                        }
+                   </tr>
+                        }
+
+                    </table>
+                </div>
+            </div>
+            <br />
+            @*Row 15*@
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <div class="homeDivButtons">
+                        <button type="submit" class="btn btn-info btn-lg btn-block">Submit</button>
+                    </div>
+                </div>
+            </div>
+            <br />
+
+        } @*End form*@
+    </div>
+</div> @*Second row end*@
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
